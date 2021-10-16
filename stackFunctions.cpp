@@ -1,4 +1,5 @@
-#include "stackFunctions.h" 
+#include "ultimateGuard.h"
+#include "stackFunctions.h"
 
 enum stkError ctorStk (struct stk* stk, size_t requestedCapacity, int poison)
 {
@@ -7,80 +8,88 @@ enum stkError ctorStk (struct stk* stk, size_t requestedCapacity, int poison)
     stk->buffer = (int*)calloc (requestedCapacity, sizeof(int));
 
     //printf ("value in stk = %d\n", *stk->buffer);
+    //
+    //printf ("pointer to stack = %p\n", (void*)stk->buffer);
 
     if (stk->buffer == nullptr)
         return ALLOCNOMEM;
 
+    *(stk->buffer) = poison;
+    stk->canaryL = canaryL;
     stk->nElement = 0;
     stk->capacity = requestedCapacity;
+    stk->canaryR = canaryR;
 
     stk->poison = poison;
-
-    return NOERR; // error code NOERR
+    
+    return NOERR;
 }
 
 enum stkError dtorStk (struct stk* stk)
 {
-    // CHECK STACK VALIDITY AND THAT IT HAS NOT BEEN DESTRUCTED
-    MY_ASSERT (stk != nullptr, "pointer to stack equals to nullptr");
+    STK_ZASHIBIS(); 
 
-    for (size_t stkElement = 0; stkElement < (stk->capacity); stkElement++)
-    {
-        *(stk->buffer + stkElement) = stk->poison;
-    }
+    printStk (stk);
 
+    stk->buffer = nullptr;
     stk->capacity = 0;
     stk->nElement = 0;
 
     free (stk->buffer); 
-        
-    return NOERR; // error codeЖ
+    
+    return NOERR;
 }
 
 enum stkError pushStk (struct stk *stk, /*stkType*/int value) 
-{
-    MY_ASSERT (stk != nullptr, "pointer to stack equals nullptr");
+{    
+    STK_ZASHIBIS();
 
     if (stk->nElement >= stk->capacity)
         resizeStk (stk);
 
     *(stk->buffer + stk->nElement) = value;
+
     stk->nElement++;
-    
+
+    STK_ZASHIBIS();    
     return NOERR;
 }
 
 enum stkError popStk (struct stk *stk, int* poppedVal)
 {
-    MY_ASSERT (stk != nullptr, "pointer to stack equals null");
-
+    STK_ZASHIBIS();
+    
     if (stk->nElement == 0)
         return STKUNDERFLOW;
      
     *poppedVal = *(stk->buffer + stk->nElement - 1);
-    *(stk->buffer + stk->nElement - 1) = 0;
+    *(stk->buffer + stk->nElement - 1) = stk->poison;
     stk->nElement--;
 
     if (stk->nElement == stk->capacity/2)
         resizeStk (stk);
+   
+    STK_ZASHIBIS();
 
     return NOERR;
 }
 
 enum stkError resizeStk (struct stk *stk)
 {
-    MY_ASSERT (stk != nullptr, "pointer to stack equals null");
+    STK_ZASHIBIS();
 
     if (stk->nElement == stk->capacity)
     {
         stk->buffer = (int*)realloc (stk->buffer, (stk->capacity)*2*sizeof(int));
         if (stk->buffer == nullptr)
-            return REALLOCNOMEM;
+            return ALLOCNOMEM;
     
-        for (size_t i = stk->capacity + 1; i < stk->capacity*2; i++)
-            *(stk->buffer + i) = 0;
+        for (size_t i = stk->capacity; i < stk->capacity*2; i++)
+            *(stk->buffer + i) = stk->poison;
 
         stk->capacity *= 2;
+
+        STK_ZASHIBIS();
 
         return NOERR;
     }
@@ -88,10 +97,10 @@ enum stkError resizeStk (struct stk *stk)
     if (stk->nElement == stk->capacity/2 && stk->capacity != 1)
     {
         stk->buffer = (int*)realloc (stk->buffer, (stk->capacity)*sizeof(int)/2);
-        if (stk->buffer == nullptr)
-            return REALLOCNOMEM;
 
         stk->capacity /= 2;
+
+        STK_ZASHIBIS();
 
         return NOERR;
     }
@@ -101,7 +110,7 @@ enum stkError resizeStk (struct stk *stk)
 
 enum stkError printStk (struct stk *stk)
 {
-    MY_ASSERT (stk != nullptr, "pointer to stack equals null");
+    validityStk (stk);//STK_ZASHIBIS();
 
     for (size_t i = 0; i < stk->nElement; i++)
     {
@@ -109,6 +118,10 @@ enum stkError printStk (struct stk *stk)
     }
 
     printf ("\n");
+        
+    fflush (stdin);
+
+    validityStk (stk);
 
     return NOERR;
 }
