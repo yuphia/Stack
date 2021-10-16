@@ -3,8 +3,11 @@ NUM_ERRORS = -fmax-errors=1
 
 all:
 	mkdir -p build
-	g++ -g -Wall -Werror -Wextra -Wpedantic $(WARNS) -Wno-error=unused-function main.cpp -o build/stack.out	
+	g++ -g -Wall -Werror -Wextra -Wpedantic $(WARNS) -Wno-error=unused-function main.cpp stackFunctions.cpp -o build/stack.out	
 	#$(NUM_ERRORS) 
 
 clean:
 	rm -rf build/*
+
+run: 
+	./build/stack.out
