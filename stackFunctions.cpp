@@ -13,11 +13,16 @@ enum stkError ctorStk (struct stk* stk, size_t requestedCapacity, int poison)
 
     if (stk->buffer == nullptr)
         return ALLOCNOMEM;
-
-    *(stk->buffer) = poison;
+    
     stk->canaryL = canaryL;
+    
+    *(stk->buffer) = poison;
+    
     stk->nElement = 0;
     stk->capacity = requestedCapacity;
+    
+    stk->lastError = NOERR;
+
     stk->canaryR = canaryR;
 
     stk->poison = poison;
@@ -46,7 +51,8 @@ enum stkError pushStk (struct stk *stk, /*stkType*/int value)
     STK_ZASHIBIS();
 
     if (stk->nElement >= stk->capacity)
-        resizeStk (stk);
+        if (resizeStk (stk) != NOERR)
+            return FATAL_ERROR;
 
     *(stk->buffer + stk->nElement) = value;
 
@@ -81,10 +87,12 @@ enum stkError resizeStk (struct stk *stk)
 
     if (stk->nElement == stk->capacity)
     {
-        stk->buffer = (int*)realloc (stk->buffer, (stk->capacity)*2*sizeof(int));
+        stk->buffer = nullptr;//(int*)realloc (stk->buffer, (stk->capacity)*2*sizeof(int));
         if (stk->buffer == nullptr)
-            return ALLOCNOMEM;
+            stk->lastError =  REALLOCNOMEM;
     
+        STK_ZASHIBIS();
+       
         for (size_t i = stk->capacity; i < stk->capacity*2; i++)
             *(stk->buffer + i) = stk->poison;
 
@@ -98,7 +106,9 @@ enum stkError resizeStk (struct stk *stk)
     if (stk->nElement == stk->capacity/2 && stk->capacity != 1)
     {
         stk->buffer = (int*)realloc (stk->buffer, (stk->capacity)*sizeof(int)/2);
-
+        if (stk->buffer == nullptr)
+            stk->lastError = REALLOCNOMEM;
+            
         stk->capacity /= 2;
 
         STK_ZASHIBIS();
@@ -111,7 +121,7 @@ enum stkError resizeStk (struct stk *stk)
 
 enum stkError printStk (struct stk *stk)
 {
-    validityStk (stk);//STK_ZASHIBIS();
+    STK_ZASHIBIS();
 
     for (size_t i = 0; i < stk->nElement; i++)
     {
@@ -122,7 +132,7 @@ enum stkError printStk (struct stk *stk)
         
     fflush (stdin);
 
-    validityStk (stk);
+    STK_ZASHIBIS();
 
     return NOERR;
 }

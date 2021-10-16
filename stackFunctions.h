@@ -14,13 +14,15 @@
     enum stkError  {
                     NOERR = 0,
                     ALLOCNOMEM = -100,
+                    REALLOCNOMEM = -101,
                     STKUNDERFLOW = -1,
                     STKOVERFLOW = 228,
                     STKOUTSIDEACCESS = 1337,
                     STKDEAD = 4,
                     RESIZEWRONGCALL = 1989,
                     NULLPOINTERSTRUCT = 7, 
-                    FATAL_ERROR = 666  
+                    FATAL_ERROR = 666,
+                    NON_FATAL_ERROR = 616                    
                     };
     
     struct stk 
@@ -33,6 +35,8 @@
             size_t capacity;
 
             int poison;
+
+            enum stkError lastError;
 
             canary_t canaryR;
             };

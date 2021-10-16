@@ -1,4 +1,5 @@
 #include "stackFunctions.h"
+#include "ultimateGuard.h"
 
 int main ()
 {
@@ -18,7 +19,16 @@ int main ()
 
     pushStk (&testStack, 28);
     printStk (&testStack);
-
+    
+    pushStk (&testStack, 28);
+    printStk (&testStack);
+   
+    pushStk (&testStack, 28);
+    printStk (&testStack);
+    
+    pushStk (&testStack, 28);
+    printStk (&testStack);
+   
     //printf ("ts nelement = %zu\n", testStack.nElement);
 
     popStk (&testStack, &poppedVal);

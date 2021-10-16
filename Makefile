@@ -7,9 +7,12 @@ ENABLE_WERROR = -Werror
 ENABLE_PIE = -pie
 ENABLE_GDB = -g
 
+ENABLE_DEBUG = -D DEBUG_STK
+DISABLE_DEBUG = -D NDEBUG_STK
+
 NUM_ERRORS = -fmax-errors=1
 
-SOURCES = main.cpp stackFunctions.cpp 
+SOURCES = main.cpp stackFunctions.cpp ultimateGuard.cpp 
 
 DIR_BUILD = build
 DIR_RELEASE = $(DIR_BUILD)/release
@@ -28,11 +31,11 @@ all: release
 
 release:
 	mkdir -p $(DIR_RELEASE)
-	$(COMPILER) $(STANDARD) $(WARNS) 						  				 			    $(SOURCES) $(OBJECTS_RELEASE) 	
+	$(COMPILER) $(STANDARD) $(WARNS)                                                       $(DISABLE_DEBUG) $(SOURCES) $(OBJECTS_RELEASE) 	
 
 debug:
 	mkdir -p $(DIR_DEBUG)
-	$(COMPILER) $(ENABLE_GDB) $(ENABLE_WERROR) $(STANDARD) $(WARNS) $(WARNSF) $(ENABLE_PIE) $(SOURCES) $(OBJECTS_DEBUG)
+	$(COMPILER) $(ENABLE_GDB) $(ENABLE_WERROR) $(STANDARD) $(WARNS) $(WARNSF) $(ENABLE_PIE) $(ENABLE_DEBUG) $(SOURCES) $(OBJECTS_DEBUG)
 
 clean:
 	rm -rf $(DIR_BUILD)/*
