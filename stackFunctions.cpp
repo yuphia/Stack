@@ -31,12 +31,13 @@ enum stkError dtorStk (struct stk* stk)
 
     printStk (stk);
 
-    stk->buffer = nullptr;
     stk->capacity = 0;
     stk->nElement = 0;
 
     free (stk->buffer); 
-    
+ 
+    stk->buffer = nullptr;   
+
     return NOERR;
 }
 

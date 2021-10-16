@@ -32,7 +32,6 @@ int main ()
     printStk (&testStack);
     //printf ("popped value = %d\n", poppedVal);
 
-    dtorStk (&testStack);
     dtorStk (&testStack); 
     return NOERR;
 }
