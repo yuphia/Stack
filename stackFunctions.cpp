@@ -87,7 +87,7 @@ enum stkError resizeStk (struct stk *stk)
 
     if (stk->nElement == stk->capacity)
     {
-        stk->buffer = nullptr;//(int*)realloc (stk->buffer, (stk->capacity)*2*sizeof(int));
+        stk->buffer = (int*)realloc (stk->buffer, (stk->capacity)*2*sizeof(int));
         if (stk->buffer == nullptr)
             stk->lastError =  REALLOCNOMEM;
     

@@ -128,6 +128,16 @@ const char splitter[] = "=======================================================
     }
 #endif
 
+#if (defined(NDEBUG_STK) && defined(DEBUG_STK)) || (!defined(NDEBUG_STK) && !defined(DEBUG_STK)) 
+    #define LOGDUMP(logFile, stk, isPossibleToWrite, message, isError)\
+    {\
+        printf("Running options seem to be wrong, you should either run with"\
+                " DEBUG_STK or NDEBUG_STK, please use the Makefile to compile and run"\
+                ", If there is still a mistake please check Makefile options\n");\
+        abort();\
+    }
+#endif
+
 //===========================================================================
 
 void dumpStk (struct stk* stk);
