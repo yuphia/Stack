@@ -24,17 +24,16 @@ const char splitter[] = "=======================================================
 //===========================================================================
 //===========================================================================
 
-#define stackBuffer(i) *(stk->buffer + i) 
-#define stackCanaryBufferL *(stk->buffer)
-#define stackCanaryBufferR *(stk->buffer + stk->capacity - sizeof(canary_t)) 
+#define stkBuffer(i) *(int*)((unsigned char*)stk->buffer + i*sizeof(int) + sizeof (canary_t)) 
+#define stkCanaryBufferL *(canary_t*)(stk->buffer)
+#define stkCanaryBufferR *(canary_t*)((unsigned char*)stk->buffer + stk->capacity*sizeof(int) + sizeof(canary_t)) 
 
 //===========================================================================
 
 #define STK_ZASHIBIS()\
     if (validityStk (stk) != NOERR)\
     {\
-        printf ("An error has occured, please turn on"\
-                " the debug mode and check log.txt\n");\
+        printf ("An error has occured, please turn on the debug mode and check log.txt\n");\
         return FATAL_ERROR;\
     }            
 
@@ -53,10 +52,11 @@ const char splitter[] = "=======================================================
         fprintf (logFile, "dump #%zu\n", dumpCounter());\
         if (isError)\
         {\
-            \
             fprintf (logFile, "An error has occured in file:" __FILE__ "\n\n"\
                     "In Line: %d \n\n"\
                     "While executing function: %s\n" , __LINE__, __PRETTY_FUNCTION__);\
+            printf ("An error has occured, please turn on"\
+                " the debug mode and check log.txt\n");\
             \
             fprintf (logFile, "\n"#message"\n\n");\
         }\

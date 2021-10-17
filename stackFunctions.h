@@ -22,14 +22,18 @@
                     RESIZEWRONGCALL = 1989,
                     NULLPOINTERSTRUCT = 7, 
                     FATAL_ERROR = 666,
-                    NON_FATAL_ERROR = 616                    
+                    NON_FATAL_ERROR = 616,
+                    CANARYL_DEAD = 10,
+                    CANARYR_DEAD = 15,
+                    CANARYL_BUFF_STK_DEAD = 20,
+                    CANARYR_BUFF_STK_DEAD = 25                    
                     };
     
     struct stk 
             {
             canary_t canaryL;
 
-            int* buffer; //buffer[capacity]
+            void* buffer; //buffer[capacity]
     
             size_t nElement;
             size_t capacity;
@@ -42,7 +46,7 @@
             };
 
     enum stkError resizeStk (struct stk *stk);
-    enum stkError ctorStk (struct stk* stk, size_t requestedCapacity, int poison);
+    enum stkError ctorStk (struct stk* stk, int poison);
     enum stkError dtorStk (struct stk* stk);
     enum stkError pushStk (struct stk *stk, /*stkType*/int value); 
     enum stkError popStk (struct stk *stk, int* poppedVal);

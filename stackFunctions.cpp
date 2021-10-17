@@ -1,11 +1,12 @@
 #include "ultimateGuard.h"
 #include "stackFunctions.h"
 
-enum stkError ctorStk (struct stk* stk, size_t requestedCapacity, int poison)
+enum stkError ctorStk (struct stk* stk, int poison)
 {
     MY_ASSERT (stk != nullptr, "pointer to your stack equals to nullptr");
 
-    stk->buffer = (int*)calloc (requestedCapacity, sizeof(int));
+    stk->buffer = calloc (sizeof(int) + 2*sizeof(canary_t), 
+                                          sizeof(unsigned char));
 
     //printf ("value in stk = %d\n", *stk->buffer);
     //
@@ -15,18 +16,25 @@ enum stkError ctorStk (struct stk* stk, size_t requestedCapacity, int poison)
         return ALLOCNOMEM;
     
     stk->canaryL = canaryL;
+    stk->capacity = 1;
+
+    stkCanaryBufferL = canaryBufferL;
+ 
+    stkCanaryBufferR = canaryBufferR; 
     
-    *(stk->buffer) = poison;
+    for (size_t i = 0; i < stk->capacity; i++)
+        stkBuffer (i) = poison;
     
     stk->nElement = 0;
-    stk->capacity = requestedCapacity;
-    
+        
     stk->lastError = NOERR;
 
     stk->canaryR = canaryR;
 
     stk->poison = poison;
     
+    STK_ZASHIBIS();
+
     return NOERR;
 }
 
@@ -47,14 +55,14 @@ enum stkError dtorStk (struct stk* stk)
 }
 
 enum stkError pushStk (struct stk *stk, /*stkType*/int value) 
-{    
+{  
     STK_ZASHIBIS();
 
     if (stk->nElement >= stk->capacity)
         if (resizeStk (stk) != NOERR)
             return FATAL_ERROR;
 
-    *(stk->buffer + stk->nElement) = value;
+    stkBuffer (stk->nElement) = value;
 
     stk->nElement++;
 
@@ -64,15 +72,19 @@ enum stkError pushStk (struct stk *stk, /*stkType*/int value)
 
 enum stkError popStk (struct stk *stk, int* poppedVal)
 {
+    $
     STK_ZASHIBIS();
-    
+    $
     if (stk->nElement == 0)
-        return STKUNDERFLOW;
-     
-    *poppedVal = *(stk->buffer + stk->nElement - 1);
-    *(stk->buffer + stk->nElement - 1) = stk->poison;
-    stk->nElement--;
+        stk->lastError =  STKUNDERFLOW;
 
+    STK_ZASHIBIS();
+
+    stk->nElement--;
+     
+    *poppedVal = stkBuffer (stk->nElement);
+    stkBuffer (stk->nElement) = stk->poison; 
+    
     if (stk->nElement == stk->capacity/2)
         resizeStk (stk);
    
@@ -87,29 +99,33 @@ enum stkError resizeStk (struct stk *stk)
 
     if (stk->nElement == stk->capacity)
     {
-        stk->buffer = (int*)realloc (stk->buffer, (stk->capacity)*2*sizeof(int));
+        stk->buffer = realloc (stk->buffer, (stk->capacity)*2*sizeof(int) + 
+                                                            2*sizeof(canary_t));
         if (stk->buffer == nullptr)
             stk->lastError =  REALLOCNOMEM;
-    
-        STK_ZASHIBIS();
-       
-        for (size_t i = stk->capacity; i < stk->capacity*2; i++)
-            *(stk->buffer + i) = stk->poison;
-
+   
         stk->capacity *= 2;
+      
+        stkCanaryBufferR = canaryBufferR; 
+        
+        for (size_t i = stk->nElement; i < stk->capacity; i++)
+            stkBuffer (i) = stk->poison;
 
         STK_ZASHIBIS();
 
         return NOERR;
     }
 
-    if (stk->nElement == stk->capacity/2 && stk->capacity != 1)
+    if (stk->nElement <= stk->capacity/2 && stk->capacity != 1)
     {
-        stk->buffer = (int*)realloc (stk->buffer, (stk->capacity)*sizeof(int)/2);
+        stk->buffer = realloc (stk->buffer, 2*sizeof(canary_t) + 
+                                                  (stk->capacity)*sizeof(int)/2);
         if (stk->buffer == nullptr)
             stk->lastError = REALLOCNOMEM;
             
-        stk->capacity /= 2;
+        stk->capacity /= 2; 
+    
+        stkCanaryBufferR = canaryBufferR;
 
         STK_ZASHIBIS();
 
@@ -124,8 +140,8 @@ enum stkError printStk (struct stk *stk)
     STK_ZASHIBIS();
 
     for (size_t i = 0; i < stk->nElement; i++)
-    {
-        printf ("buffer[%zu] = %d\n", i, *(stk->buffer + i));
+    { 
+        printf ("buffer[%zu] = %d\n", i, stkBuffer (i));
     }
 
     printf ("\n");
