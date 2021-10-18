@@ -3,6 +3,7 @@
 
 enum stkError ctorStk (struct stk* stk, int poison)
 {
+    prepareLogs();
     struct dumpInfo info = {};
     getinfo ();
         
@@ -22,18 +23,14 @@ enum stkError ctorStk (struct stk* stk, int poison)
     stk->capacity = 1;
 
     stkCanaryBufferL = canaryBufferL;
- 
     stkCanaryBufferR = canaryBufferR; 
     
     for (size_t i = 0; i < stk->capacity; i++)
         stkBuffer (i) = poison;
     
     stk->nElement = 0;
-        
     stk->lastError = NOERR;
-
     stk->canaryR = canaryR;
-
     stk->poison = poison;
     
     STK_ZASHIBIS();
@@ -83,10 +80,9 @@ enum stkError popStk (struct stk *stk, int* poppedVal)
 {
     struct dumpInfo info = {};
     getinfo ();
-    
-    $
+     
     STK_ZASHIBIS();
-    $
+    
     if (stk->nElement == 0)
         stk->lastError =  STKUNDERFLOW;
 

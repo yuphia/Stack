@@ -17,8 +17,6 @@
 #include "stackFunctions.h"
 //#if defined(deff1) || defined(def2)
 
-FILE* const logFileConst = fopen ("log.txt", "w");
-
 const char splitter[] = "====================================================================================================================================\n";
 
 //===========================================================================
@@ -49,11 +47,11 @@ const char splitter[] = "=======================================================
     #define LOGDUMP(logFile, stk, isPossibleToWrite, message, isError) \
     {\
         fprintf (logFile, "%s\n", splitter);\
-        fprintf (logFile, "dump #%zu\n", dumpCounter());\
+        fprintf (logFile, "dump #%zu\n\n", dumpCounter());\
         if (isError)\
         {\
             fprintf (logFile, "An error has occured in file: %s\n\n"\
-                    "In Line: %d \n\n"\
+                    "Detected in Line: %d \n\n"\
                     "While executing function: %s\n", info->file, info->line, info->function);\
             printf ("An error has occured, please turn on"\
                 " the debug mode and check log.txt\n");\
@@ -62,12 +60,12 @@ const char splitter[] = "=======================================================
         }\
         else\
         {\
-            fprintf (logFile, "Everything is OK\n");\
+            fprintf (logFile, "Everything is OK\n\n");\
         }\
         \
         if (isPossibleToWrite)\
         {\
-           dumpStk (stk);\
+           dumpStk (stk, logFileConst);\
         }\
         else\
         {\
@@ -83,33 +81,7 @@ const char splitter[] = "=======================================================
     #define LOGDUMP(logFile, stk, isPossibleToWrite, message, isError) \
     {\
         fprintf (logFile, "%s\n", splitter);\
-        fprintf (logFile, "dump #%zu\n", dumpCounter());\
-        if (isError)\
-        {\
-            \
-            fprintf (logFile, "An error has occured in file: %s\n\n"\
-                    "In Line: %d \n\n"\
-                    "While executing function: %s\n", info->file, info->line, info->function);\
-            \
-            fprintf (logFile, "\n"#message"\n\n");\
-        }\
-        else\
-        {\
-            fprintf (logFile, "Everything is OK\n");\
-        }\
-        \
-        if (isPossibleToWrite)\
-        {\
-           dumpStk (stk);\
-        }\
-        else\
-        {\
-           fprintf (logFile, "It is imposibble to dump the stack elements due to the error\n");\
-        }\
-        \
-        fprintf (logFile, "%s\n", splitter);\
-        fflush (logFile);\
-        \
+        fprintf (logFile, "dump #%zu\n\n", dumpCounter());\
         if (isError)\
         {\
             fprintf (stderr, "%s\n", splitter);\
@@ -121,18 +93,35 @@ const char splitter[] = "=======================================================
             fprintf (stderr, "\n"#message"\n\n");\
              \
             if (isPossibleToWrite)\
-            {\
-                dumpStk (stk);\
-            }\
-            else\
-            {\
-                fprintf (logFile, "It is imposibble to dump the stack elements due to the error\n");\
-            }\
+                printStk (stk);\
             \
             fprintf (stderr, "%s\n", splitter);\
             fflush (stderr);\
-            abort();\
+            fprintf (logFile, "An error has occured in file: %s\n\n"\
+                    "Detected in Line: %d \n\n"\
+                    "While executing function: %s\n", info->file, info->line, info->function);\
+            \
+            fprintf (logFile, "\n"#message"\n\n");\
         }\
+        else\
+        {\
+            fprintf (logFile, "Everything is OK.\n\n");\
+        }\
+        \
+        if (isPossibleToWrite)\
+        {\
+           dumpStk (stk, logFileConst);\
+        }\
+        else\
+        {\
+           fprintf (logFile, "It is imposibble to dump the stack elements due to the error\n");\
+        }\
+        \
+        fprintf (logFile, "%s\n", splitter);\
+        fflush (logFile);\
+        \
+        if (isError)\
+            abort();\
     }
 #endif
 
@@ -148,7 +137,7 @@ const char splitter[] = "=======================================================
 
 //===========================================================================
 
-void dumpStk (struct stk* stk);
+void dumpStk (struct stk* stk, FILE* const logFileConst);
 size_t dumpCounter();
 enum stkError validityStk (struct stk* stk, struct dumpInfo* info);
 

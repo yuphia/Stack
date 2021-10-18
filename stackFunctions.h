@@ -65,6 +65,7 @@
     enum stkError pushStk (struct stk *stk, /*stkType*/int value); 
     enum stkError popStk (struct stk *stk, int* poppedVal);
     enum stkError printStk (struct stk *stk);
+    void prepareLogs();
 #endif
 
 
