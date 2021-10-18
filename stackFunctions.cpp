@@ -3,8 +3,11 @@
 
 enum stkError ctorStk (struct stk* stk, int poison)
 {
+    struct dumpInfo info = {};
+    getinfo ();
+        
     MY_ASSERT (stk != nullptr, "pointer to your stack equals to nullptr");
-
+    
     stk->buffer = calloc (sizeof(int) + 2*sizeof(canary_t), 
                                           sizeof(unsigned char));
 
@@ -40,6 +43,9 @@ enum stkError ctorStk (struct stk* stk, int poison)
 
 enum stkError dtorStk (struct stk* stk)
 {
+    struct dumpInfo info = {};
+    getinfo ();
+    
     STK_ZASHIBIS(); 
 
     printStk (stk);
@@ -56,6 +62,9 @@ enum stkError dtorStk (struct stk* stk)
 
 enum stkError pushStk (struct stk *stk, /*stkType*/int value) 
 {  
+    struct dumpInfo info = {};
+    getinfo ();
+    
     STK_ZASHIBIS();
 
     if (stk->nElement >= stk->capacity)
@@ -72,6 +81,9 @@ enum stkError pushStk (struct stk *stk, /*stkType*/int value)
 
 enum stkError popStk (struct stk *stk, int* poppedVal)
 {
+    struct dumpInfo info = {};
+    getinfo ();
+    
     $
     STK_ZASHIBIS();
     $
@@ -95,6 +107,9 @@ enum stkError popStk (struct stk *stk, int* poppedVal)
 
 enum stkError resizeStk (struct stk *stk)
 {
+    struct dumpInfo info = {};
+    getinfo ();
+    
     STK_ZASHIBIS();
 
     if (stk->nElement == stk->capacity)
@@ -137,6 +152,9 @@ enum stkError resizeStk (struct stk *stk)
 
 enum stkError printStk (struct stk *stk)
 {
+    struct dumpInfo info = {};
+    getinfo ();
+
     STK_ZASHIBIS();
 
     for (size_t i = 0; i < stk->nElement; i++)
@@ -152,5 +170,4 @@ enum stkError printStk (struct stk *stk)
 
     return NOERR;
 }
-
 

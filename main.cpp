@@ -48,8 +48,8 @@ int main ()
     popStk (&testStack, &poppedVal);
     popStk (&testStack, &poppedVal);
     popStk (&testStack, &poppedVal);
-    //popStk (&testStack, &poppedVal);
-    //popStk (&testStack, &poppedVal);
+    popStk (&testStack, &poppedVal);
+    popStk (&testStack, &poppedVal);
 
     //printStk (&testStack);
     //printf ("popped value = %d\n", poppedVal);

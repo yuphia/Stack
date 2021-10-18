@@ -1,10 +1,17 @@
 #ifndef STACKFUNCTIONS_H
-    #define STACKFUNCTIONS_H 1
+    #define STACKFUNCTIONS_H 1 
 
     #include "myAssert.h"
 
+    #define getinfo()\
+    {\
+        info.line = __LINE__;\
+        info.function = __PRETTY_FUNCTION__;\
+        info.file = __FILE__;\
+    }\
 
     typedef unsigned long long canary_t;
+    typedef unsigned long long hash_t;
 
     const canary_t canaryL        = 0xABADBABE;
     const canary_t canaryR        = 0xB16B00B5;
@@ -29,8 +36,15 @@
                     CANARYR_BUFF_STK_DEAD = 25                    
                     };
     
+    struct dumpInfo
+        {
+            int line;
+            const char* file;
+            const char* function;
+        };
+
     struct stk 
-            {
+        {
             canary_t canaryL;
 
             void* buffer; //buffer[capacity]
@@ -43,7 +57,7 @@
             enum stkError lastError;
 
             canary_t canaryR;
-            };
+        };
 
     enum stkError resizeStk (struct stk *stk);
     enum stkError ctorStk (struct stk* stk, int poison);

@@ -31,7 +31,7 @@ const char splitter[] = "=======================================================
 //===========================================================================
 
 #define STK_ZASHIBIS()\
-    if (validityStk (stk) != NOERR)\
+    if (validityStk (stk, &info) != NOERR)\
     {\
         printf ("An error has occured, please turn on the debug mode and check log.txt\n");\
         return FATAL_ERROR;\
@@ -52,13 +52,17 @@ const char splitter[] = "=======================================================
         fprintf (logFile, "dump #%zu\n", dumpCounter());\
         if (isError)\
         {\
-            fprintf (logFile, "An error has occured in file:" __FILE__ "\n\n"\
+            fprintf (logFile, "An error has occured in file: %s\n\n"\
                     "In Line: %d \n\n"\
-                    "While executing function: %s\n" , __LINE__, __PRETTY_FUNCTION__);\
+                    "While executing function: %s\n", info->file, info->line, info->function);\
             printf ("An error has occured, please turn on"\
                 " the debug mode and check log.txt\n");\
             \
             fprintf (logFile, "\n"#message"\n\n");\
+        }\
+        else\
+        {\
+            fprintf (logFile, "Everything is OK\n");\
         }\
         \
         if (isPossibleToWrite)\
@@ -83,11 +87,15 @@ const char splitter[] = "=======================================================
         if (isError)\
         {\
             \
-            fprintf (logFile, "An error has occured in file:" __FILE__ "\n\n"\
+            fprintf (logFile, "An error has occured in file: %s\n\n"\
                     "In Line: %d \n\n"\
-                    "While executing function: %s\n" , __LINE__, __PRETTY_FUNCTION__);\
+                    "While executing function: %s\n", info->file, info->line, info->function);\
             \
             fprintf (logFile, "\n"#message"\n\n");\
+        }\
+        else\
+        {\
+            fprintf (logFile, "Everything is OK\n");\
         }\
         \
         if (isPossibleToWrite)\
@@ -106,9 +114,9 @@ const char splitter[] = "=======================================================
         {\
             fprintf (stderr, "%s\n", splitter);\
             fprintf (stderr, "dump #%zu\n", dumpCounter());\
-            fprintf (stderr, "An error has occured in file:" __FILE__ "\n\n"\
+            fprintf (stderr, "An error has occured in file: %s\n\n"\
                     "In Line: %d \n\n"\
-                    "While executing function: %s\n" , __LINE__, __PRETTY_FUNCTION__);\
+                    "While executing function: %s\n", info->file, info->line, info->function);\
             \
             fprintf (stderr, "\n"#message"\n\n");\
              \
@@ -142,7 +150,7 @@ const char splitter[] = "=======================================================
 
 void dumpStk (struct stk* stk);
 size_t dumpCounter();
-enum stkError validityStk (struct stk* stk);
+enum stkError validityStk (struct stk* stk, struct dumpInfo* info);
 
 
 

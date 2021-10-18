@@ -22,7 +22,7 @@ size_t dumpCounter()
     return dumpCounter;
 }
 
-enum stkError validityStk (struct stk* stk)
+enum stkError validityStk (struct stk* stk, struct dumpInfo* info)
 {
     if (stk == nullptr)
     {
