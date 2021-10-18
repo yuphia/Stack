@@ -140,7 +140,6 @@ const char splitter[] = "=======================================================
 void dumpStk (struct stk* stk, FILE* const logFileConst);
 size_t dumpCounter();
 enum stkError validityStk (struct stk* stk, struct dumpInfo* info);
-
-
+hash_t hashCalc (struct stk* stk);
 
 #endif

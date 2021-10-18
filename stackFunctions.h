@@ -3,12 +3,13 @@
 
     #include "myAssert.h"
 
-    #define getinfo()\
-    {\
+    #define GET_INFO()\
+    \
+        struct dumpInfo info = {};\
         info.line = __LINE__;\
         info.function = __PRETTY_FUNCTION__;\
         info.file = __FILE__;\
-    }\
+    \
 
     typedef unsigned long long canary_t;
     typedef unsigned long long hash_t;
@@ -33,7 +34,8 @@
                     CANARYL_DEAD = 10,
                     CANARYR_DEAD = 15,
                     CANARYL_BUFF_STK_DEAD = 20,
-                    CANARYR_BUFF_STK_DEAD = 25                    
+                    CANARYR_BUFF_STK_DEAD = 25,
+                    HASH_DEAD = 100                    
                     };
     
     struct dumpInfo
@@ -56,10 +58,12 @@
 
             enum stkError lastError;
 
+            hash_t hash;
+
             canary_t canaryR;
         };
 
-    enum stkError resizeStk (struct stk *stk);
+    enum stkError resizeStk (struct stk *stk, size_t newSize);
     enum stkError ctorStk (struct stk* stk, int poison);
     enum stkError dtorStk (struct stk* stk);
     enum stkError pushStk (struct stk *stk, /*stkType*/int value); 

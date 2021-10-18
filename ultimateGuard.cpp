@@ -1,4 +1,5 @@
 #include "ultimateGuard.h"
+#include "stackFunctions.h"
 
 void dumpStk (struct stk* stk, FILE* const logFileConst)
 {
@@ -7,13 +8,13 @@ void dumpStk (struct stk* stk, FILE* const logFileConst)
     fprintf (logFileConst, "lastError = %d\n\n", stk->lastError);
 
     fprintf (logFileConst, "Lcanary = %llx\n", stk->canaryL);
-    fprintf (logFileConst, "Lcanary in buffer = %llx\n", stkCanaryBufferL);
+    fprintf (logFileConst, "Lcanary in buffer = %llx\n\n", stkCanaryBufferL);
 
     for (size_t i = 0; i < stk->capacity; i++)
     {
         fprintf (logFileConst,  "buffer[%zu] = %d\n", i, stkBuffer (i));
          
-        if (i == stk->nElement - 1)
+        if (i == stk->nElement - 1 && stk->nElement != stk->capacity)
             fprintf (logFileConst, "\n"
                      "Further elements do not contain stack elements,"
                      "but they lie in the bufferized region"
@@ -21,7 +22,7 @@ void dumpStk (struct stk* stk, FILE* const logFileConst)
                      "\n");
     }    
 
-    fprintf (logFileConst, "Rcanary = %llx\n", stk->canaryR);
+    fprintf (logFileConst, "\nRcanary = %llx\n", stk->canaryR);
     fprintf (logFileConst, "Rcanary in buffer = %llx\n", stkCanaryBufferR);
 }
 
@@ -42,6 +43,27 @@ enum stkError validityStk (struct stk* stk, struct dumpInfo* info)
         LOGDUMP (logFileConst, stk, 0, "Pointer to struct stk equals nullptr\n", 1);
         fclose (logFileConst);
         return NULLPOINTERSTRUCT;
+    }
+
+    if (stk->buffer == nullptr && stk->lastError == REALLOCNOMEM)
+    {
+        LOGDUMP (logFileConst, stk, 0, "Pointer to buffer equals nullptr. Latest reallocation has failed", 1); 
+        fclose (logFileConst);
+        return REALLOCNOMEM;
+    }
+    
+    if (stk->buffer == nullptr && stk->capacity != 0)
+    {
+        LOGDUMP (logFileConst, stk, 0, "Pointer to buffer equals nullptr. Latest allocation has failed\n", 1);
+        fclose (logFileConst);
+        return ALLOCNOMEM;
+    }
+
+    if (stk->hash != hashCalc (stk))
+    {
+        LOGDUMP (logFileConst, stk, 0, "HASH POMER VIRUBAY", 1);
+        fclose (logFileConst);
+        return HASH_DEAD;
     }
 
     if (stk->canaryL != canaryL)
@@ -76,20 +98,6 @@ enum stkError validityStk (struct stk* stk, struct dumpInfo* info)
         return CANARYR_BUFF_STK_DEAD;
     }
   
-    if (stk->buffer == nullptr && stk->lastError == REALLOCNOMEM)
-    {
-        LOGDUMP (logFileConst, stk, 0, "Pointer to buffer equals nullptr. Latest reallocation has failed", 1); 
-        fclose (logFileConst);
-        return REALLOCNOMEM;
-    }
-    
-    if (stk->buffer == nullptr && stk->capacity != 0)
-    {
-        LOGDUMP (logFileConst, stk, 0, "Pointer to buffer equals nullptr. Latest allocation has failed\n", 1);
-        fclose (logFileConst);
-        return ALLOCNOMEM;
-    }
-
     if (stk->lastError == STKUNDERFLOW)
     {
         LOGDUMP (logFileConst, stk, 0, "Most likely you have called more pops than needed, be careful", 1);
@@ -133,3 +141,46 @@ void prepareLogs ()
 {
     fclose (fopen ("log.txt", "w"));
 }
+
+/*hash_t countHash (struct Stk* stk)
+{
+    MY_ASSERT (stk != nullptr, "pointer to stk stuct is nullptr");
+
+    static uint32_t seed = 0xBEB7AAAA;
+    uint32_t hash = murmurhash (stk, (uint32_t) sizeof (stk), seed); // 0xb6d99cf8
+    return hash;
+}*/
+
+static hash_t rotl (hash_t n)
+{
+    unsigned d = 13;
+    n *= d;
+    return (n << d)|(n >> (32 - d));
+}
+
+hash_t hashCalc (struct stk* stk)
+{
+    MY_ASSERT (stk != nullptr, "pointer to stk struct equals nullptr");
+
+    hash_t hash = 0xBEB7A000;
+
+    hash ^= rotl (stk->canaryL);
+    hash ^= rotl (stk->lastError);
+    hash ^= rotl (stk->capacity);
+    hash ^= rotl (stk->poison);
+
+    if (stk->nElement > 0 && stk->buffer != nullptr)
+        for (size_t i = 0; i < stk->nElement; ++i)
+            hash ^= rotl (stkBuffer (i));
+
+    hash ^= rotl (stk->canaryR);
+
+    hash ^= (hash >> 16);
+    hash *= 0x85ebca6b;
+    hash ^= (hash >> 13);
+    hash *= 0xc2b2ae35;
+    hash ^= (hash >> 16);
+
+    return hash;
+}
+

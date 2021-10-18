@@ -43,13 +43,15 @@ int main ()
     //testStack.canaryL = 1;
     //testStack.canaryR = 2;
 
+    //printf ("hash = %llx", countHash (stk));
+
     popStk (&testStack, &poppedVal);
     popStk (&testStack, &poppedVal);
     popStk (&testStack, &poppedVal);
     popStk (&testStack, &poppedVal);
     popStk (&testStack, &poppedVal);
-    popStk (&testStack, &poppedVal);
-    popStk (&testStack, &poppedVal);
+    //popStk (&testStack, &poppedVal);
+    //popStk (&testStack, &poppedVal);
 
     //printStk (&testStack);
     //printf ("popped value = %d\n", poppedVal);

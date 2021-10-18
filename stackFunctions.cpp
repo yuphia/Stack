@@ -4,8 +4,7 @@
 enum stkError ctorStk (struct stk* stk, int poison)
 {
     prepareLogs();
-    struct dumpInfo info = {};
-    getinfo ();
+    GET_INFO();
         
     MY_ASSERT (stk != nullptr, "pointer to your stack equals to nullptr");
     
@@ -32,6 +31,7 @@ enum stkError ctorStk (struct stk* stk, int poison)
     stk->lastError = NOERR;
     stk->canaryR = canaryR;
     stk->poison = poison;
+    stk->hash = hashCalc (stk);
     
     STK_ZASHIBIS();
 
@@ -40,8 +40,7 @@ enum stkError ctorStk (struct stk* stk, int poison)
 
 enum stkError dtorStk (struct stk* stk)
 {
-    struct dumpInfo info = {};
-    getinfo ();
+    GET_INFO();
     
     STK_ZASHIBIS(); 
 
@@ -59,18 +58,19 @@ enum stkError dtorStk (struct stk* stk)
 
 enum stkError pushStk (struct stk *stk, /*stkType*/int value) 
 {  
-    struct dumpInfo info = {};
-    getinfo ();
+    GET_INFO ();
     
     STK_ZASHIBIS();
 
     if (stk->nElement >= stk->capacity)
-        if (resizeStk (stk) != NOERR)
+        if (resizeStk (stk, 2*stk->capacity) != NOERR)
             return FATAL_ERROR;
 
     stkBuffer (stk->nElement) = value;
 
     stk->nElement++;
+
+    stk->hash = hashCalc (stk);
 
     STK_ZASHIBIS();    
     return NOERR;
@@ -78,8 +78,7 @@ enum stkError pushStk (struct stk *stk, /*stkType*/int value)
 
 enum stkError popStk (struct stk *stk, int* poppedVal)
 {
-    struct dumpInfo info = {};
-    getinfo ();
+    GET_INFO();
      
     STK_ZASHIBIS();
     
@@ -92,64 +91,45 @@ enum stkError popStk (struct stk *stk, int* poppedVal)
      
     *poppedVal = stkBuffer (stk->nElement);
     stkBuffer (stk->nElement) = stk->poison; 
-    
-    if (stk->nElement == stk->capacity/2)
-        resizeStk (stk);
    
+    stk->hash = hashCalc (stk);
+ 
+    if (stk->nElement == stk->capacity/2)
+        resizeStk (stk, stk->capacity/2);
+   
+    
     STK_ZASHIBIS();
 
     return NOERR;
 }
 
-enum stkError resizeStk (struct stk *stk)
+enum stkError resizeStk (struct stk *stk, size_t newSize)
 {
-    struct dumpInfo info = {};
-    getinfo ();
+    GET_INFO ();
     
+    STK_ZASHIBIS ();    
+
+    stk->buffer = realloc (stk->buffer, newSize*sizeof(int) + 2*sizeof(canary_t));
+    if (stk->buffer == nullptr)
+        stk->lastError =  REALLOCNOMEM;
+   
+    stk->capacity = newSize;
+      
+    stkCanaryBufferR = canaryBufferR; 
+        
+    for (size_t i = stk->nElement; i < stk->capacity; i++)
+        stkBuffer (i) = stk->poison;
+
+    stk->hash = hashCalc (stk);
+
     STK_ZASHIBIS();
 
-    if (stk->nElement == stk->capacity)
-    {
-        stk->buffer = realloc (stk->buffer, (stk->capacity)*2*sizeof(int) + 
-                                                            2*sizeof(canary_t));
-        if (stk->buffer == nullptr)
-            stk->lastError =  REALLOCNOMEM;
-   
-        stk->capacity *= 2;
-      
-        stkCanaryBufferR = canaryBufferR; 
-        
-        for (size_t i = stk->nElement; i < stk->capacity; i++)
-            stkBuffer (i) = stk->poison;
-
-        STK_ZASHIBIS();
-
-        return NOERR;
-    }
-
-    if (stk->nElement <= stk->capacity/2 && stk->capacity != 1)
-    {
-        stk->buffer = realloc (stk->buffer, 2*sizeof(canary_t) + 
-                                                  (stk->capacity)*sizeof(int)/2);
-        if (stk->buffer == nullptr)
-            stk->lastError = REALLOCNOMEM;
-            
-        stk->capacity /= 2; 
-    
-        stkCanaryBufferR = canaryBufferR;
-
-        STK_ZASHIBIS();
-
-        return NOERR;
-    }
-
-    return RESIZEWRONGCALL;
+    return NOERR;
 }
 
 enum stkError printStk (struct stk *stk)
 {
-    struct dumpInfo info = {};
-    getinfo ();
+    GET_INFO();
 
     STK_ZASHIBIS();
 
