@@ -196,10 +196,8 @@ template <typename data>
 //===========================================================================
 size_t updDumpCounter();
 
-template <typename data>
 void dumpFunctionInt (struct stk<int>* stk, size_t i, FILE* const logFileConst);
 
-template <typename data>
 void dumpFunctionDouble (struct stk<double>* stk, size_t i, FILE* const logFileConst);
 
 template <typename data>
@@ -363,16 +361,14 @@ size_t updDumpCounter()
     return dumpCounter;
 }
 
-template <typename data>
 void dumpFunctionInt (struct stk<int>* stk, size_t i, FILE* const logFileConst)
 {
-    fprintf (logFileConst,  "buffer[%zu] = %d\n", i, stkBuffer (i));
+    fprintf (logFileConst,  "buffer[%zu] = %d\n", i, *(int*)((unsigned char*)stk->buffer + i*sizeof(int) + sizeof (canary_t)));
 }
 
-template <typename data>
 void dumpFunctionDouble (struct stk<double>* stk, size_t i, FILE* const logFileConst)
 {
-    fprintf (logFileConst,  "buffer[%zu] = %lg\n", i, stkBuffer (i));
+    fprintf (logFileConst,  "buffer[%zu] = %lg\n", i, *(double*)((unsigned char*)stk->buffer + i*sizeof(double) + sizeof (canary_t)));
 }
 
 #endif

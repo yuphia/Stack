@@ -8,7 +8,7 @@ int main ()
 
     double poppedVal = -100;
     
-    ctorStk (&testStack, 32.0, &dumpFunctionDouble<double>); 
+    ctorStk (&testStack, 32.0, &dumpFunctionDouble); 
 
     //printStk (&testStack);
 
@@ -51,8 +51,8 @@ int main ()
     popStk<double> (&testStack, &poppedVal);
     popStk<double> (&testStack, &poppedVal);
     popStk<double> (&testStack, &poppedVal);
-    popStk<double> (&testStack, &poppedVal);
-    popStk<double> (&testStack, &poppedVal);
+    //popStk<double> (&testStack, &poppedVal);
+    //popStk<double> (&testStack, &poppedVal);
 
     //printStk (&testStack);
     //printf ("popped value = %d\n", poppedVal);
