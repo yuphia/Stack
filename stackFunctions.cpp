@@ -94,7 +94,7 @@ enum stkError popStk (struct stk *stk, int* poppedVal)
    
     stk->hash = hashCalc (stk);
  
-    if (stk->nElement == stk->capacity/2)
+    if (stk->nElement == stk->capacity/2 - stkDelta)
         resizeStk (stk, stk->capacity/2);
    
     

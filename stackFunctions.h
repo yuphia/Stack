@@ -19,6 +19,8 @@
     const canary_t canaryBufferL  = 0xDEFEC8ED;
     const canary_t canaryBufferR  = 0xDEAD2BAD;
 
+    const size_t stkDelta = 2;
+
     enum stkError  {
                     NOERR = 0,
                     ALLOCNOMEM = -100,
