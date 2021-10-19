@@ -15,140 +15,10 @@
 #include <stdio.h>
 #include <math.h>
 #include "stackFunctions.h"
-//#if defined(deff1) || defined(def2)
-
-const char splitter[] = "====================================================================================================================================\n";
-
-//===========================================================================
-//===========================================================================
-
-//===========================================================================
-#define $ printf ("line = %d in file: " __FILE__ "\n\n" , __LINE__);
-
-//===========================================================================
-
-#ifdef LOGDUMP
-    #undef LOGDUMP
-#endif
-
-#if (defined(NDEBUG_STK))&&(!defined(DEBUG_STK))
-    #define LOGDUMP(logFile, stk, isPossibleToWrite, message, isError) \
-    {\
-        fprintf (logFile, "%s\n", splitter);\
-        fprintf (logFile, "dump #%zu\n\n", dumpCounter());\
-        if (isError)\
-        {\
-            fprintf (logFile, "An error has occured in file: %s\n\n"\
-                    "Detected in Line: %d \n\n"\
-                    "While executing function: %s\n", info->file, info->line, info->function);\
-            printf ("An error has occured, please turn on"\
-                " the debug mode and check log.txt\n");\
-            \
-            fprintf (logFile, "\n"#message"\n\n");\
-        }\
-        else\
-        {\
-            fprintf (logFile, "Everything is OK\n\n");\
-        }\
-        \
-        if (isPossibleToWrite)\
-        {\
-           dumpStk (stk, logFileConst);\
-        }\
-        else\
-        {\
-           fprintf (logFile, "It is imposibble to dump the stack elements due to the error\n");\
-        }\
-        \
-        fprintf (logFile, "%s\n", splitter);\
-        fflush (logFile);\
-    }
-#endif
-
-#if (!defined(NDEBUG_STK))&&(defined(DEBUG_STK))
-    #define LOGDUMP(logFile, stk, isPossibleToWrite, message, isError) \
-    {\
-        fprintf (logFile, "%s\n", splitter);\
-        fprintf (logFile, "dump #%zu\n\n", dumpCounter());\
-        if (isError)\
-        {\
-            fprintf (stderr, "%s\n", splitter);\
-            fprintf (stderr, "dump #%zu\n", dumpCounter());\
-            fprintf (stderr, "An error has occured in file: %s\n\n"\
-                    "In Line: %d \n\n"\
-                    "While executing function: %s\n", info->file, info->line, info->function);\
-            \
-            fprintf (stderr, "\n"#message"\n\n");\
-             \
-            if (isPossibleToWrite)\
-                printStk (stk);\
-            \
-            fprintf (stderr, "%s\n", splitter);\
-            fflush (stderr);\
-            fprintf (logFile, "An error has occured in file: %s\n\n"\
-                    "Detected in Line: %d \n\n"\
-                    "While executing function: %s\n", info->file, info->line, info->function);\
-            \
-            fprintf (logFile, "\n"#message"\n\n");\
-        }\
-        else\
-        {\
-            fprintf (logFile, "Everything is OK.\n\n");\
-        }\
-        \
-        if (isPossibleToWrite)\
-        {\
-           dumpStk (stk, logFileConst);\
-        }\
-        else\
-        {\
-           fprintf (logFile, "It is imposibble to dump the stack elements due to the error\n");\
-        }\
-        \
-        fprintf (logFile, "%s\n", splitter);\
-        fflush (logFile);\
-        \
-        if (isError)\
-            abort();\
-    }
-#endif
-
-#if (defined(NDEBUG_STK) && defined(DEBUG_STK)) || (!defined(NDEBUG_STK) && !defined(DEBUG_STK)) 
-    #define LOGDUMP(logFile, stk, isPossibleToWrite, message, isError)\
-    {\
-        printf("Running options seem to be wrong, you should either run with"\
-                " DEBUG_STK or NDEBUG_STK, please use the Makefile to compile and run"\
-                ", If there is still a mistake please check Makefile options\n");\
-        abort();\
-    }
-#endif
-
-template <typename data>
-    struct stk 
-        {
-            canary_t canaryL;
-
-            void* buffer; //buffer[capacity]
-    
-            size_t nElement;
-            size_t capacity;
-
-            data poison;
-
-            enum stkError lastError;
-
-            hash_t hash;
-
-            void (*dumper) (struct stk* stk, size_t i, FILE* const logFileConst);
-
-            canary_t canaryR;
-        };
-
 
 //===========================================================================
 template <typename data>
 void dumpStk (struct stk<data>* stk, FILE* const logFileConst);
-
 
 size_t dumpCounter();
 
@@ -160,12 +30,6 @@ hash_t hashCalc (struct stk<data>* stk);
 
 template <typename data>
 void dumpFunctionInt (struct stk<data>* stk, size_t i, FILE* const logFileConst);
-
-template <typename data>
-void dumpFunctionInt (struct stk<data>* stk, size_t i, FILE* const logFileConst)
-{
-    fprintf (logFileConst,  "buffer[%zu] = %d\n", i, stkBuffer (i));
-}
 
 template <typename data>
 enum stkError validityStk (struct stk<data>* stk, struct dumpInfo* info)
@@ -271,11 +135,6 @@ enum stkError validityStk (struct stk<data>* stk, struct dumpInfo* info)
     return NOERR; 
 }
 
-void prepareLogs ()
-{
-    fclose (fopen ("log.txt", "w"));
-}
-
 /*hash_t countHash (struct Stk* stk)
 {
     MY_ASSERT (stk != nullptr, "pointer to stk stuct is nullptr");
@@ -284,6 +143,14 @@ void prepareLogs ()
     uint32_t hash = murmurhash (stk, (uint32_t) sizeof (stk), seed); // 0xb6d99cf8
     return hash;
 }*/
+
+void prepareLogs ()
+{
+    FILE* const temp = fopen ("log.txt", "w");
+    
+    MY_ASSERT (temp != nullptr, "Couldn't prepare logs (open the log.txt)");
+    fclose (temp);
+}
 
 static hash_t rotl (hash_t n)
 {
