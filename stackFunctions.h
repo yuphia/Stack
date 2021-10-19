@@ -10,11 +10,15 @@
 #define stkCanaryBufferR *(canary_t*)((unsigned char*)stk->buffer + stk->capacity*sizeof(data) + sizeof(canary_t))
 
 
-#define GET_INFO() struct dumpInfo info = {};\
-    info.line = __LINE__;\
-    info.function = __PRETTY_FUNCTION__;\
-    info.file = __FILE__;\
+#define GET_INFO() struct dumpInfo info = \
+    {\
+     __LINE__,\
+     __FILE__,\
+     __PRETTY_FUNCTION__\
+    };
+    
 
+    
 #define STK_ZASHIBIS()\
     if (validityStk (stk, &info) != NOERR)\
     {\
@@ -392,7 +396,7 @@ size_t updDumpCounter()
 
 size_t getDumpCounter()
 {
-    return (updDumpCounter() - 1);
+    return updDumpCounter() - 1;
 }
 
 static hash_t rotl (hash_t n)
