@@ -540,7 +540,10 @@ enum stkError validityStk (struct stk<data>* stk, struct dumpInfo* info)
 
 void prepareLogs ()
 {
-    fclose (fopen ("log.txt", "w"));
+    FILE* const temp = fopen ("log.txt", "w");
+    
+    MY_ASSERT (temp != nullptr, "Couldn't prepare logs (open the log.txt)");
+    fclose (temp);
 }
 
 template <typename data>
