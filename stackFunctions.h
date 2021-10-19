@@ -41,7 +41,7 @@ const char splitter[] = "=======================================================
     #define LOGDUMP(logFile, stk, isPossibleToWrite, message, isError) \
     {\
         fprintf (logFile, "%s\n", splitter);\
-        fprintf (logFile, "dump #%zu\n\n", dumpCounter());\
+        fprintf (logFile, "dump #%zu\n\n", updDumpCounter());\
         if (isError)\
         {\
             fprintf (logFile, "An error has occured in file: %s\n\n"\
@@ -75,11 +75,11 @@ const char splitter[] = "=======================================================
     #define LOGDUMP(logFile, stk, isPossibleToWrite, message, isError) \
     {\
         fprintf (logFile, "%s\n", splitter);\
-        fprintf (logFile, "dump #%zu\n\n", dumpCounter());\
+        fprintf (logFile, "dump #%zu\n\n", updDumpCounter());\
         if (isError)\
         {\
             fprintf (stderr, "%s\n", splitter);\
-            fprintf (stderr, "dump #%zu\n", dumpCounter());\
+            fprintf (stderr, "dump #%zu\n", getDumpCounter());\
             fprintf (stderr, "An error has occured in file: %s\n\n"\
                     "In Line: %d \n\n"\
                     "While executing function: %s\n", info->file, info->line, info->function);\
@@ -195,7 +195,8 @@ template <typename data>
 void dumpStk (struct stk<data>* stk, FILE* const logFileConst);
 
 
-size_t dumpCounter();
+size_t updDumpCounter();
+size_t getDumpCounter();
 
 template <typename data>
 enum stkError validityStk (struct stk<data>* stk, struct dumpInfo* info);
@@ -341,7 +342,10 @@ enum stkError resizeStk (struct stk<data> *stk, size_t newSize)
 
     stk->buffer = realloc (stk->buffer, newSize*sizeof(data) + 2*sizeof(canary_t));
     if (stk->buffer == nullptr)
-        stk->lastError =  REALLOCNOMEM;
+    {
+        stk->lastError = REALLOCNOMEM;
+        STK_ZASHIBIS();
+    }
 
     stk->capacity = newSize;
 
@@ -378,12 +382,17 @@ enum stkError printStk (struct stk<data> *stk)
     return NOERR;
 }
 
-size_t dumpCounter()
+size_t updDumpCounter()
 {
     static size_t dumpCounter = 0;
 
     dumpCounter++;
     return dumpCounter;
+}
+
+size_t getDumpCounter()
+{
+    return (updDumpCounter() - 1);
 }
 
 static hash_t rotl (hash_t n)
