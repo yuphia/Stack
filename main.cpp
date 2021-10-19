@@ -1,32 +1,32 @@
 #include "stackFunctions.h"
-#include "ultimateGuard.h"
+
 
 int main ()
 {
-    struct stk testStack = {};
+    struct stk<double> testStack = {};
 
-    int poppedVal = -100;
+    double poppedVal = -100;
     
-    ctorStk (&testStack, 32); 
+    ctorStk (&testStack, 32.0, &dumpFunctionDouble<double>); 
 
     //printStk (&testStack);
 
-    pushStk (&testStack, 1);
+    pushStk (&testStack, (double)1);
     //printStk (&testStack);
 
-    pushStk (&testStack, 28);
+    pushStk (&testStack, (double)28);
     //printStk (&testStack);
 
-    pushStk (&testStack, 28);
+    pushStk (&testStack, (double)28);
     //printStk (&testStack);
     //
-    pushStk (&testStack, 28);
+    pushStk (&testStack, (double)28);
     //printStk (&testStack); 
 
-    pushStk (&testStack, 228);
+    pushStk (&testStack, (double)228);
     //printStk (&testStack);
     
-    pushStk (&testStack, 1337);
+    pushStk (&testStack, (double)1337);
     //printStk (&testStack);
    
     //printf ("ts nelement = %zu\n", testStack.nElement);
@@ -35,7 +35,7 @@ int main ()
     //printStk (&testStack);
     //printf ("popped value = %d\n", poppedVal);
 
-    pushStk (&testStack, 15);
+    pushStk (&testStack, (double)15);
     //printStk (&testStack);
     
     //printf ("\n%d\n", *testStack.buffer);
