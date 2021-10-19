@@ -11,31 +11,31 @@ int main ()
 
     //printStk (&testStack);
 
-    pushStk (&testStack, (double)1);
+    pushStk<double> (&testStack, 1);
     //printStk (&testStack);
 
-    pushStk (&testStack, (double)28);
+    pushStk<double> (&testStack, 28);
     //printStk (&testStack);
 
-    pushStk (&testStack, (double)28);
+    pushStk<double> (&testStack, 28);
     //printStk (&testStack);
     //
-    pushStk (&testStack, (double)28);
+    pushStk<double> (&testStack, 28);
     //printStk (&testStack); 
 
-    pushStk (&testStack, (double)228);
+    pushStk<double> (&testStack, 228);
     //printStk (&testStack);
     
-    pushStk (&testStack, (double)1337);
+    pushStk<double> (&testStack, 1337);
     //printStk (&testStack);
    
     //printf ("ts nelement = %zu\n", testStack.nElement);
 
-    popStk (&testStack, &poppedVal);
+    popStk<double> (&testStack, &poppedVal);
     //printStk (&testStack);
     //printf ("popped value = %d\n", poppedVal);
 
-    pushStk (&testStack, (double)15);
+    pushStk<double> (&testStack, 15);
     //printStk (&testStack);
     
     //printf ("\n%d\n", *testStack.buffer);
@@ -45,13 +45,13 @@ int main ()
 
     //printf ("hash = %llx", countHash (stk));
 
-    popStk (&testStack, &poppedVal);
-    popStk (&testStack, &poppedVal);
-    popStk (&testStack, &poppedVal);
-    popStk (&testStack, &poppedVal);
-    popStk (&testStack, &poppedVal);
-    popStk (&testStack, &poppedVal);
-    popStk (&testStack, &poppedVal);
+    popStk<double> (&testStack, &poppedVal);
+    popStk<double> (&testStack, &poppedVal);
+    popStk<double> (&testStack, &poppedVal);
+    popStk<double> (&testStack, &poppedVal);
+    popStk<double> (&testStack, &poppedVal);
+    popStk<double> (&testStack, &poppedVal);
+    popStk<double> (&testStack, &poppedVal);
 
     //printStk (&testStack);
     //printf ("popped value = %d\n", poppedVal);

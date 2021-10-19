@@ -20,7 +20,7 @@
 
     
 #define STK_ZASHIBIS()\
-    if (validityStk (stk, &info) != NOERR)\
+    if (validityStk<data> (stk, &info) != NOERR)\
     {\
         printf ("An error has occured, please turn on the debug mode and check log.txt\n");\
         return FATAL_ERROR;\
@@ -90,9 +90,7 @@ const char splitter[] = "=======================================================
                     "While executing function: %s\n", info->file, info->line, info->function);\
             \
             fprintf (stderr, "\n"#message"\n\n");\
-             \
-            if (isPossibleToWrite)\
-                printStk (stk);\
+            \
             \
             fprintf (stderr, "%s\n", splitter);\
             fflush (stderr);\
@@ -226,10 +224,6 @@ enum stkError pushStk (struct stk<data> *stk, /*stkType*/data value);
 template <typename data>
 enum stkError popStk (struct stk<data> *stk, data* poppedVal);
 
-template <typename data>
-enum stkError printStk (struct stk<data> *stk);
-
-
 void prepareLogs();
 
 template <typename data>
@@ -359,27 +353,6 @@ enum stkError resizeStk (struct stk<data> *stk, size_t newSize)
         stkBuffer (i) = stk->poison;
 
     stk->hash = hashCalc (stk);
-
-    STK_ZASHIBIS();
-
-    return NOERR;
-}
-
-template <typename data>
-enum stkError printStk (struct stk<data> *stk)
-{
-    GET_INFO();
-
-    STK_ZASHIBIS();
-
-    for (size_t i = 0; i < stk->nElement; i++)
-    {
-        //printf ("buffer[%zu] = %d\n", i, stkBuffer (i));
-    }
-
-    printf ("\n");
-
-    fflush (stdin);
 
     STK_ZASHIBIS();
 
