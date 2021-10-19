@@ -79,11 +79,12 @@ const char splitter[] = "=======================================================
     #define LOGDUMP(logFile, stk, isPossibleToWrite, message, isError) \
     {\
         fprintf (logFile, "%s\n", splitter);\
-        fprintf (logFile, "dump #%zu\n\n", updDumpCounter());\
+        size_t thisDump = updDumpCounter();\
+        fprintf (logFile, "dump #%zu\n\n", thisDump);\
         if (isError)\
         {\
             fprintf (stderr, "%s\n", splitter);\
-            fprintf (stderr, "dump #%zu\n", getDumpCounter());\
+            fprintf (stderr, "dump #%zu\n", thisDump);\
             fprintf (stderr, "An error has occured in file: %s\n\n"\
                     "In Line: %d \n\n"\
                     "While executing function: %s\n", info->file, info->line, info->function);\
@@ -200,7 +201,6 @@ void dumpStk (struct stk<data>* stk, FILE* const logFileConst);
 
 
 size_t updDumpCounter();
-size_t getDumpCounter();
 
 template <typename data>
 enum stkError validityStk (struct stk<data>* stk, struct dumpInfo* info);
@@ -392,11 +392,6 @@ size_t updDumpCounter()
 
     dumpCounter++;
     return dumpCounter;
-}
-
-size_t getDumpCounter()
-{
-    return updDumpCounter() - 1;
 }
 
 static hash_t rotl (hash_t n)
