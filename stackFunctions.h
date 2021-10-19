@@ -371,7 +371,7 @@ static hash_t rotl (hash_t n)
 {
     unsigned d = 13;
     n *= d;
-    return (n << d)|(n >> (32 - d));
+    return (n << d)|(n >> (4*sizeof (hash_t) - d));
 }
 
 template <typename data>
