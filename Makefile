@@ -29,6 +29,9 @@ COMPILER = g++
 
 all: release
 
+createLog:
+	touch log.txt
+
 release:
 	mkdir -p $(DIR_RELEASE)
 	$(COMPILER) $(STANDARD) $(WARNS)                                                       $(DISABLE_DEBUG) $(SOURCES) $(OBJECTS_RELEASE) 	
