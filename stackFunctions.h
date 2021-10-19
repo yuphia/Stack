@@ -197,7 +197,10 @@ template <typename data>
 size_t updDumpCounter();
 
 template <typename data>
-void dumpFunctionInt (struct stk<data>* stk, size_t i, FILE* const logFileConst);
+void dumpFunctionInt (struct stk<int>* stk, size_t i, FILE* const logFileConst);
+
+template <typename data>
+void dumpFunctionDouble (struct stk<double>* stk, size_t i, FILE* const logFileConst);
 
 template <typename data>
 enum stkError resizeStk (struct stk<data> *stk, size_t newSize);
@@ -361,13 +364,13 @@ size_t updDumpCounter()
 }
 
 template <typename data>
-void dumpFunctionInt (struct stk<data>* stk, size_t i, FILE* const logFileConst)
+void dumpFunctionInt (struct stk<int>* stk, size_t i, FILE* const logFileConst)
 {
     fprintf (logFileConst,  "buffer[%zu] = %d\n", i, stkBuffer (i));
 }
 
 template <typename data>
-void dumpFunctionDouble (struct stk<data>* stk, size_t i, FILE* const logFileConst)
+void dumpFunctionDouble (struct stk<double>* stk, size_t i, FILE* const logFileConst)
 {
     fprintf (logFileConst,  "buffer[%zu] = %lg\n", i, stkBuffer (i));
 }
