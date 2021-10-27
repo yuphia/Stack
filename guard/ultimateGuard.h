@@ -14,7 +14,7 @@
 
 #include <stdio.h>
 #include <math.h>
-#include "stackFunctions.h"
+#include "../stackFuncs/stackFunctions.h"
 
 //===========================================================================
 template <typename data>

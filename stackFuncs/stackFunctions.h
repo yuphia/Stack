@@ -1,7 +1,7 @@
 #ifndef STACKFUNCTIONS_H
 #define STACKFUNCTIONS_H 1
 
-#include "myAssert.h"
+#include "../myAssert.h"
 #include <math.h>
 #include <stdio.h>
 

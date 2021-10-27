@@ -1,0 +1,1200 @@
+====================================================================================================================================
+
+dump #1
+
+Everything is OK.
+
+Capacity = 1
+nElement = 0
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #2
+
+Everything is OK.
+
+Capacity = 1
+nElement = 0
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #3
+
+Everything is OK.
+
+Capacity = 1
+nElement = 1
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #4
+
+Everything is OK.
+
+Capacity = 1
+nElement = 1
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #5
+
+Everything is OK.
+
+Capacity = 1
+nElement = 1
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #6
+
+Everything is OK.
+
+Capacity = 2
+nElement = 1
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[1] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #7
+
+Everything is OK.
+
+Capacity = 2
+nElement = 2
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #8
+
+Everything is OK.
+
+Capacity = 2
+nElement = 2
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #9
+
+Everything is OK.
+
+Capacity = 2
+nElement = 2
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #10
+
+Everything is OK.
+
+Capacity = 4
+nElement = 2
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[2] = 32
+buffer[3] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #11
+
+Everything is OK.
+
+Capacity = 4
+nElement = 3
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+buffer[2] = 28
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[3] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #12
+
+Everything is OK.
+
+Capacity = 4
+nElement = 3
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+buffer[2] = 28
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[3] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #13
+
+Everything is OK.
+
+Capacity = 4
+nElement = 4
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+buffer[2] = 28
+buffer[3] = 28
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #14
+
+Everything is OK.
+
+Capacity = 4
+nElement = 4
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+buffer[2] = 28
+buffer[3] = 28
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #15
+
+Everything is OK.
+
+Capacity = 4
+nElement = 4
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+buffer[2] = 28
+buffer[3] = 28
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #16
+
+Everything is OK.
+
+Capacity = 8
+nElement = 4
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+buffer[2] = 28
+buffer[3] = 28
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[4] = 32
+buffer[5] = 32
+buffer[6] = 32
+buffer[7] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #17
+
+Everything is OK.
+
+Capacity = 8
+nElement = 5
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+buffer[2] = 28
+buffer[3] = 28
+buffer[4] = 228
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[5] = 32
+buffer[6] = 32
+buffer[7] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #18
+
+Everything is OK.
+
+Capacity = 8
+nElement = 5
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+buffer[2] = 28
+buffer[3] = 28
+buffer[4] = 228
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[5] = 32
+buffer[6] = 32
+buffer[7] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #19
+
+Everything is OK.
+
+Capacity = 8
+nElement = 6
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+buffer[2] = 28
+buffer[3] = 28
+buffer[4] = 228
+buffer[5] = 1337
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[6] = 32
+buffer[7] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #20
+
+Everything is OK.
+
+Capacity = 8
+nElement = 6
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+buffer[2] = 28
+buffer[3] = 28
+buffer[4] = 228
+buffer[5] = 1337
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[6] = 32
+buffer[7] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #21
+
+Everything is OK.
+
+Capacity = 8
+nElement = 6
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+buffer[2] = 28
+buffer[3] = 28
+buffer[4] = 228
+buffer[5] = 1337
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[6] = 32
+buffer[7] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #22
+
+Everything is OK.
+
+Capacity = 8
+nElement = 5
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+buffer[2] = 28
+buffer[3] = 28
+buffer[4] = 228
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[5] = 32
+buffer[6] = 32
+buffer[7] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #23
+
+Everything is OK.
+
+Capacity = 8
+nElement = 5
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+buffer[2] = 28
+buffer[3] = 28
+buffer[4] = 228
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[5] = 32
+buffer[6] = 32
+buffer[7] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #24
+
+Everything is OK.
+
+Capacity = 8
+nElement = 6
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+buffer[2] = 28
+buffer[3] = 28
+buffer[4] = 228
+buffer[5] = 15
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[6] = 32
+buffer[7] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #25
+
+Everything is OK.
+
+Capacity = 8
+nElement = 6
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+buffer[2] = 28
+buffer[3] = 28
+buffer[4] = 228
+buffer[5] = 15
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[6] = 32
+buffer[7] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #26
+
+Everything is OK.
+
+Capacity = 8
+nElement = 6
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+buffer[2] = 28
+buffer[3] = 28
+buffer[4] = 228
+buffer[5] = 15
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[6] = 32
+buffer[7] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #27
+
+Everything is OK.
+
+Capacity = 8
+nElement = 5
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+buffer[2] = 28
+buffer[3] = 28
+buffer[4] = 228
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[5] = 32
+buffer[6] = 32
+buffer[7] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #28
+
+Everything is OK.
+
+Capacity = 8
+nElement = 5
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+buffer[2] = 28
+buffer[3] = 28
+buffer[4] = 228
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[5] = 32
+buffer[6] = 32
+buffer[7] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #29
+
+Everything is OK.
+
+Capacity = 8
+nElement = 5
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+buffer[2] = 28
+buffer[3] = 28
+buffer[4] = 228
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[5] = 32
+buffer[6] = 32
+buffer[7] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #30
+
+Everything is OK.
+
+Capacity = 8
+nElement = 4
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+buffer[2] = 28
+buffer[3] = 28
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[4] = 32
+buffer[5] = 32
+buffer[6] = 32
+buffer[7] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #31
+
+Everything is OK.
+
+Capacity = 8
+nElement = 4
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+buffer[2] = 28
+buffer[3] = 28
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[4] = 32
+buffer[5] = 32
+buffer[6] = 32
+buffer[7] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #32
+
+Everything is OK.
+
+Capacity = 8
+nElement = 4
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+buffer[2] = 28
+buffer[3] = 28
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[4] = 32
+buffer[5] = 32
+buffer[6] = 32
+buffer[7] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #33
+
+Everything is OK.
+
+Capacity = 8
+nElement = 3
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+buffer[2] = 28
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[3] = 32
+buffer[4] = 32
+buffer[5] = 32
+buffer[6] = 32
+buffer[7] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #34
+
+Everything is OK.
+
+Capacity = 8
+nElement = 3
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+buffer[2] = 28
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[3] = 32
+buffer[4] = 32
+buffer[5] = 32
+buffer[6] = 32
+buffer[7] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #35
+
+Everything is OK.
+
+Capacity = 8
+nElement = 3
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+buffer[2] = 28
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[3] = 32
+buffer[4] = 32
+buffer[5] = 32
+buffer[6] = 32
+buffer[7] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #36
+
+Everything is OK.
+
+Capacity = 8
+nElement = 2
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[2] = 32
+buffer[3] = 32
+buffer[4] = 32
+buffer[5] = 32
+buffer[6] = 32
+buffer[7] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #37
+
+Everything is OK.
+
+Capacity = 4
+nElement = 2
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[2] = 32
+buffer[3] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #38
+
+Everything is OK.
+
+Capacity = 4
+nElement = 2
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[2] = 32
+buffer[3] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #39
+
+Everything is OK.
+
+Capacity = 4
+nElement = 2
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[2] = 32
+buffer[3] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #40
+
+Everything is OK.
+
+Capacity = 4
+nElement = 2
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+buffer[1] = 28
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[2] = 32
+buffer[3] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #41
+
+Everything is OK.
+
+Capacity = 4
+nElement = 1
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[1] = 32
+buffer[2] = 32
+buffer[3] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #42
+
+Everything is OK.
+
+Capacity = 4
+nElement = 1
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[1] = 32
+buffer[2] = 32
+buffer[3] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #43
+
+Everything is OK.
+
+Capacity = 4
+nElement = 1
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[1] = 32
+buffer[2] = 32
+buffer[3] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #44
+
+Everything is OK.
+
+Capacity = 4
+nElement = 0
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 32
+buffer[1] = 32
+buffer[2] = 32
+buffer[3] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #45
+
+Everything is OK.
+
+Capacity = 2
+nElement = 0
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 32
+buffer[1] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #46
+
+Everything is OK.
+
+Capacity = 2
+nElement = 0
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 32
+buffer[1] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #47
+
+Everything is OK.
+
+Capacity = 2
+nElement = 0
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 32
+buffer[1] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #48
+
+An error has occured in file: stackFunctions.h
+
+Detected in Line: 303 
+
+While executing function: stkError popStk(stk<data>*, data*) [with data = double]
+
+"HASH POMER VIRUBAY"
+
+It is imposibble to dump the stack elements due to the error
+====================================================================================================================================
+

@@ -1,5 +1,5 @@
-#include "stackFunctions.h"
-#include "ultimateGuard.h"
+#include "stackFuncs/stackFunctions.h"
+#include "guard/ultimateGuard.h"
 
 
 int main ()
