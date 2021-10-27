@@ -34,7 +34,7 @@ void dumpFunctionInt (struct stk<data>* stk, size_t i, FILE* const logFileConst)
 template <typename data>
 enum stkError validityStk (struct stk<data>* stk, struct dumpInfo* info)
 {
-    FILE* const logFileConst = fopen ("log.txt", "a");
+    FILE* const logFileConst = fopen ("logs/log.txt", "a");
 
     if (stk == nullptr)
     {
@@ -146,7 +146,7 @@ enum stkError validityStk (struct stk<data>* stk, struct dumpInfo* info)
 
 void prepareLogs ()
 {
-    FILE* const temp = fopen ("log.txt", "w");
+    FILE* const temp = fopen ("logs/log.txt", "w");
     
     MY_ASSERT (temp != nullptr, "Couldn't prepare logs (open the log.txt)");
     fclose (temp);

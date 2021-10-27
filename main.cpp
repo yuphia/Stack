@@ -51,8 +51,8 @@ int main ()
     popStk<double> (&testStack, &poppedVal);
     popStk<double> (&testStack, &poppedVal);
     popStk<double> (&testStack, &poppedVal);
-    popStk<double> (&testStack, &poppedVal);
-    popStk<double> (&testStack, &poppedVal);
+    //popStk<double> (&testStack, &poppedVal);
+    //popStk<double> (&testStack, &poppedVal);
 
     //printStk (&testStack);
     //printf ("popped value = %d\n", poppedVal);
