@@ -57,13 +57,6 @@ enum stkError validityStk (struct stk<data>* stk, struct dumpInfo* info)
         return ALLOCNOMEM;
     }
 
-    if (stk->hash != hashCalc (stk))
-    {
-        LOGDUMP (logFileConst, stk, 0, "HASH POMER VIRUBAY", 1);
-        fclose (logFileConst);
-        return HASH_DEAD;
-    }
-
     if (stk->canaryL != canaryL)
     {
         LOGDUMP (logFileConst, stk, 0, "Left canary in struct is dead, Most likely the stack"
@@ -126,6 +119,13 @@ enum stkError validityStk (struct stk<data>* stk, struct dumpInfo* info)
         fclose (logFileConst);
         free (stk->buffer);
         return STKOVERFLOW;
+    }
+
+    if (stk->hash != hashCalc (stk))
+    {
+        LOGDUMP (logFileConst, stk, 0, "HASH POMER VIRUBAY", 1);
+        fclose (logFileConst);
+        return HASH_DEAD;
     }
 
     LOGDUMP (logFileConst, stk, 1, "EVERYTHING IS OK", 0);

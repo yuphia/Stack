@@ -1076,3 +1076,140 @@ Rcanary = b16b00b5
 Rcanary in buffer = dead2bad
 ====================================================================================================================================
 
+====================================================================================================================================
+
+dump #43
+
+Everything is OK
+
+Capacity = 4
+nElement = 1
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 1
+
+Further elements do not contain stack elements,but they lie in the bufferized region
+
+buffer[1] = 32
+buffer[2] = 32
+buffer[3] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #44
+
+Everything is OK
+
+Capacity = 4
+nElement = 0
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 32
+buffer[1] = 32
+buffer[2] = 32
+buffer[3] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #45
+
+Everything is OK
+
+Capacity = 2
+nElement = 0
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 32
+buffer[1] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #46
+
+Everything is OK
+
+Capacity = 2
+nElement = 0
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 32
+buffer[1] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #47
+
+Everything is OK
+
+Capacity = 2
+nElement = 0
+lastError = 0
+
+Lcanary = abadbabe
+Lcanary in buffer = defec8ed
+
+buffer[0] = 32
+buffer[1] = 32
+
+Rcanary = b16b00b5
+Rcanary in buffer = dead2bad
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #48
+
+An error has occured in file: stackFuncs/stackFunctions.h
+
+Detected in Line: 303 
+
+While executing function: stkError popStk(stk<data>*, data*) [with data = double]
+
+"Most likely you have called more pops than needed, be careful"
+
+It is imposibble to dump the stack elements due to the error
+====================================================================================================================================
+
+====================================================================================================================================
+
+dump #49
+
+An error has occured in file: stackFuncs/stackFunctions.h
+
+Detected in Line: 265 
+
+While executing function: stkError dtorStk(stk<data>*) [with data = double]
+
+"Most likely you have called more pops than needed, be careful"
+
+It is imposibble to dump the stack elements due to the error
+====================================================================================================================================
+
